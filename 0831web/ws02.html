@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>SSAFY BOOK CAFE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="img/favicon.ico" />
+    <link rel="stylesheet" href="css/main.css" />
+
+    <style>
+      * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #0f0e0e;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+/* 상단 header 영역의 속성 설정 */
+header {
+  height: 70px;
+  /* 그림자 효과 */
+  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.3);
+}
+
+header > nav {
+  position: relative;
+  margin: auto;
+  max-width: 1200px;
+  /* calc() CSS 함수를 사용하면 CSS 속성의 값으로 계산식을 지정할 수 있다 */
+  width: calc(100% - 120px);
+  height: 70px;
+}
+
+nav > a {
+  float: left;
+  margin-left: 20px;
+  line-height: 70px;
+  height: 70px;
+}
+
+.header_nav_home {
+  font-size: 38px;
+  cursor: pointer;
+}
+
+.header_nav_menu {
+  float: right;
+  top: 0;
+  width: auto;
+  height: auto;
+  transition: none;
+}
+
+.header_nav_menuitem {
+  display: inline-block;
+  margin-right: 20px;
+  height: 70px;
+  line-height: 70px;
+}
+
+.header_nav_menuitem:last-child {
+  margin-right: 10px;
+}
+
+/* 중앙 content 영역의 속성 설정 */
+.content {
+  margin: 10px auto;
+  max-width: 1200px;
+}
+
+/* 중앙 왼쪽 영역의 속성 설정 */
+.content_left {
+  float: left;
+  width: 25%;
+  min-height: 500px;
+  /* background: pink; */
+}
+
+/* 프로필 영역의 속성 설정 */
+.profile {
+  width: 100%;
+  padding: 10px 10%;
+  text-align: center;
+}
+
+.profile > img {
+  width: 70%;
+  /* height: 220px; */
+  border-radius: 10px;
+}
+
+/* 중앙 왼쪽 매장 영역의 속성 설정 */
+.store_title {
+  text-align: center;
+  padding: 10px;
+}
+
+.store_display {
+  padding: 10px;
+  font-size: 18px;
+  line-height: 30px;
+  background: #bdbdbd;
+  border-radius: 5px;
+}
+
+.store_item li {
+  padding: 10px 10px 10px 20px;
+  font-size: 18px;
+  background: #dddddd;
+  margin-top: 5px;
+  border-radius: 5px;
+  text-align: left;
+}
+
+.store_area {
+  color: #414141;
+  font-weight: bold;
+}
+
+/* 중앙 왼쪽 설문조사 영역의 속성 설정 */
+.vote {
+  margin: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  padding-left: 20px;
+}
+
+.vote_title {
+  padding: 10px;
+  color: #70706e;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: center;
+}
+
+.vote_question {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.vote_answer {
+  margin-top: 10px;
+}
+
+.vote_answer > ul > li {
+  margin-top: 10px;
+}
+
+.vote_answer > ul > li:last-child {
+  margin-bottom: 10px;
+}
+
+.vote_answer > ul > li > img {
+  width: 35px;
+  border-radius: 3px;
+}
+
+.vote_button {
+  text-align: right;
+  padding-right: 10px;
+  margin: 10px;
+}
+
+.vote_date {
+  font-weight: bold;
+  margin: 20px 0 10px;
+}
+
+.button {
+  background: white;
+  color: black;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 4px;
+}
+
+.btn_primary {
+  border-color: rgba(128, 0, 128, 0.3);
+  background: rgb(128, 0, 128);
+  color: #fff;
+}
+
+.content_body {
+  float: right;
+  width: 75%;
+  min-height: 500px;
+  /* background: red; */
+}
+
+/* 중앙 content 이미지게시판 영역의 속성 설정 */
+.menu {
+  padding: 10px 20px;
+}
+
+.menu ul {
+  overflow: hidden;
+}
+
+.menu ul > li {
+  float: left;
+  margin: 10px;
+  width: calc(25% - 20px);
+  background: #ffffff;
+  text-align: center;
+}
+
+.menu_item {
+  padding: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  height: 290px;
+}
+
+.menu_item_img {
+  height: 80%;
+}
+
+.menu_item_img > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.menu_item_info {
+  height: 20%;
+  margin-top: 10%;
+}
+
+/* 중앙 content text게시판 영역의 속성 설정 */
+.article {
+  padding: 10px 20px;
+}
+
+.article > article {
+  width: 48%;
+  margin-bottom: 20px;
+}
+
+.article_popular {
+  float: left;
+}
+
+.article_new {
+  float: right;
+}
+
+.article_popular > h3,
+.article_new > h3 {
+  margin-bottom: 15px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.table > tbody > tr > th,
+.table > tbody > tr > td {
+  padding: 8px;
+  line-height: 1.42;
+  vertical-align: top;
+  border-top: 1px solide #dddddd;
+}
+
+.table > thead > tr > th {
+  padding: 10px 5px;
+}
+
+.table_striped > tbody > tr:nth-of-type(odd) {
+  background-color: #f9f9f9;
+}
+
+.table_bordered {
+  border: 1px solid #dddddd;
+}
+
+.table_bordered > tbody > tr > th,
+.table_bordered > tbody > tr > td {
+  border: 1px solid #dddddd;
+}
+
+.table_hover > tbody > tr:hover {
+  background-color: #f5f5f5;
+}
+
+th.table {
+  width: 75%;
+}
+
+/* 하단 footer 영역의 속성 설정 */
+footer {
+  clear: both;
+  margin: 10px auto;
+  padding: 10px;
+  max-width: 1200px;
+  height: 70px;
+}
+
+footer > ul > li {
+  float: left;
+  display: inline-block;
+  margin-right: 20px;
+  height: 50px;
+  line-height: 50px;
+}
+    </style>
+  </head>
+  <body>
+    <!-- 상단 Header Start  -->
+    <header>
+      <nav>
+        <a class="header_nav_home" href="#">SSAFY BookCafe</a>
+        <a class="" href="#">공지사항</a>
+
+        <div class="header_nav_search"></div>
+
+        <div class="header_nav_menu">
+          <div class="header_nav_menuitem">
+            <a class="nav_link" href="#">로그인</a>
+          </div>
+          <div class="header_nav_menuitem">
+            <a class="nav_link" href="#">회원가입</a>
+          </div>
+          <div class="header_nav_menuitem">
+            <a class="nav_link" href="#">로그아웃</a>
+          </div>
+          <div class="header_nav_menuitem">
+            <a class="nav_link" href="#">마이페이지</a>
+          </div>
+          <div class="header_nav_menuitem">
+            <a class="nav_link" href="#">관리자</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- 상단 Header End  -->
+
+    <!-- 중앙 Contents Start  -->
+    <div class="content">
+      <!-- 왼쪽 Content Start  -->
+      <div class="content_left">
+        <!-- 프로필 사진 Start  -->
+        <div class="profile">
+          <img class="profile_img" src="img/noimg.png" alt="" />
+          <img class="profile_img" src="img/profile.png" alt="" />
+        </div>
+        <!-- 프로필 사진 End  -->
+        <!-- 메뉴 Start  -->
+        <div class="store_title">
+          <div class="store_display">전국매장펼치기</div>
+          <div class="store_display" style="display: none">전국매장접기</div>
+          <ul class="store_item">
+            <li>
+              <a class="store_area">서울</a>
+              <div class="store_item_sub">
+                <ul>
+                  <li>역삼점</li>
+                  <li>선릉점</li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <a class="store_area">대전</a>
+              <div class="store_item_sub">
+                <ul>
+                  <li>학하점</li>
+                  <li>봉명점</li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <a class="store_area">구미</a>
+              <div class="store_item_sub">
+                <ul>
+                  <li>인동점</li>
+                  <li>공단점</li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <a class="store_area">광주</a>
+              <div class="store_item_sub">
+                <ul>
+                  <li>하남산단점</li>
+                  <li>광주역점</li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!-- 메뉴 End  -->
+        <!-- 설문조사 Start  -->
+        <div class="vote">
+          <div class="vote_title">[ 당신의 선택 ]</div>
+          <div class="vote_question">공부하고 싶은 분야를 골라 주세요!!!</div>
+          <div class="vote_answer">
+            <ul>
+              <li>
+                <input type="radio" name="vote_answer" id="" />
+                <img src="img/poll/python.png" alt="" /> Python
+              </li>
+              <li>
+                <input type="radio" name="vote_answer" id="" />
+                <img src="img/poll/html5.png" alt="" /> HTML5
+              </li>
+              <li>
+                <input type="radio" name="vote_answer" id="" />
+                <img src="img/poll/vuejs.png" alt="" /> Vue.js
+              </li>
+              <li>
+                <input type="radio" name="vote_answer" id="" />
+                <img src="img/poll/java.png" alt="" /> Java
+              </li>
+            </ul>
+          </div>
+          <div class="vote_button">
+            <button class="button btn_primary">투표하기</button>
+            <button class="button">결과보기</button>
+          </div>
+          <div class="vote_date">투표기간 : 21.03.01 ~ 21.03.31</div>
+        </div>
+        <!-- 설문조사 End  -->
+      </div>
+      <!-- 왼쪽 Content End  -->
+
+      <!-- 중앙 Content Start  -->
+      <div class="content_body">
+        <!-- 프로그래밍 Section Start  -->
+        <section class="menu">
+          <h3 class="menu_title">[ 프로그래밍 언어 ]</h3>
+          <ul>
+            <li>
+              <div class="menu_item">
+                <div class="menu_item_img">
+                  <img src="img/book/p_book01.png" alt="" />
+                </div>
+                <div class="menu_item_info">
+                  Do it! 점프 투 파이썬<br />(18,800원)
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="menu_item">
+                <div class="menu_item_img">
+                  <img src="img/book/p_book02.png" alt="" />
+                </div>
+                <div class="menu_item_info">
+                  HTML5 API 프로그래밍<br />(23,000원)
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="menu_item">
+                <div class="menu_item_img">
+                  <img src="img/book/p_book03.png" alt="" />
+                </div>
+                <div class="menu_item_info">
+                  백견불여일타 Vue.js입문<br />(22,000원)
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="menu_item">
+                <div class="menu_item_img">
+                  <img src="img/book/p_book04.png" alt="" />
+                </div>
+                <div class="menu_item_info">
+                  Java 프로그래밍<br />(26,500원)
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+        <!-- 프로그래밍 Section End  -->
+
+        <!-- 에세이 Section Start  -->
+        <section class="menu">
+          <h3 class="menu_title">[ 에세이 ]</h3>
+          <ul>
+            <li>
+              <div class="menu_item">
+                <div class="menu_item_img">
+                  <img src="img/book/e_book01.png" alt="" />
+                </div>
+                <div class="menu_item_info">2인조<br />(14800원)</div>
+              </div>
+            </li>
+            <li>
+              <div class="menu_item">
+                <div class="menu_item_img">
+                  <img src="img/book/e_book02.png" alt="" />
+                </div>
+                <div class="menu_item_info">
+                  안녕, 소중한 사람<br />(15,000원)
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="menu_item">
+                <div class="menu_item_img">
+                  <img src="img/book/e_book03.png" alt="" />
+                </div>
+                <div class="menu_item_info">
+                  꽃을 보든 너를 본다<br />(10,000원)
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="menu_item">
+                <div class="menu_item_img">
+                  <img src="img/book/e_book04.png" alt="" />
+                </div>
+                <div class="menu_item_info">
+                  곰돌이 푸, 행복한 일은 매일 있어 (12,000원)
+                </div>
+              </div>
+            </li>
+          </ul>
+        </section>
+        <!-- 에세이 Section End  -->
+
+        <section class="article">
+          <!-- 인기글 Article Start  -->
+          <article class="article_popular">
+            <h3>[ 인기글 ]</h3>
+            <table class="table table_striped">
+              <thead>
+                <tr>
+                  <th class="title">제목</th>
+                  <th>작성자</th>
+                  <th>조회수</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>자바공부 쉽게하는법!!</td>
+                  <td>이쎄림</td>
+                  <td>1756</td>
+                </tr>
+                <tr>
+                  <td>알고리즘은 자바? 파이썬?</td>
+                  <td>홍정밍</td>
+                  <td>998</td>
+                </tr>
+                <tr>
+                  <td>스프링 정복하기~</td>
+                  <td>김나켠</td>
+                  <td>856</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+          <!-- 인기글 Article End  -->
+
+          <!-- 최신글 Article Start  -->
+          <article class="article_new">
+            <h3>[ 최신글 ]</h3>
+            <table class="table table_bordered table_hover">
+              <thead>
+                <tr>
+                  <th class="title">제목</th>
+                  <th>작성자</th>
+                  <th>조회수</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>web 관련 질문있어요.</td>
+                  <td>이주녕</td>
+                  <td>12</td>
+                </tr>
+                <tr>
+                  <td>vuejs는 이렇게 공부해보세요.</td>
+                  <td>조밍기</td>
+                  <td>98</td>
+                </tr>
+                <tr>
+                  <td>꽃길만 걸어요.</td>
+                  <td>류해면</td>
+                  <td>56</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+          <!-- 최신글 Article End  -->
+        </section>
+      </div>
+      <!-- 중앙 Content End  -->
+    </div>
+    <!-- 중앙 Contents End  -->
+
+    <!-- 하단 Footer Start  -->
+    <footer>
+      <ul>
+        <li><a class="" href="#">카페소개</a></li>
+        <li><a class="" href="#">개인정보처리방침</a></li>
+        <li><a class="" href="#">이용약관</a></li>
+        <li><a class="" href="#">오시는길</a></li>
+        <li>&copy; SSAFY Corp.</li>
+      </ul>
+    </footer>
+    <!-- 하단 Footer End  -->
+  </body>
+</html>
