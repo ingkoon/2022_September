@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="root" value="${pageContext.request.contextPath}"/>
+<c:if test="${cookie.ssafy_id.value ne null}">
+	<c:set var="idck" value=" checked"/>
+	<c:set var="saveid" value="${cookie.ssafy_id.value}"/>
+</c:if>
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -26,6 +31,7 @@
         </div>
         <div class="col-lg-8 col-md-10 col-sm-12">
           <form id="form-login" method="POST" action="">
+            <input type="hidden" name="act" value="login" />
             <div class="form-check mb-3 float-end">
               <input
                 class="form-check-input"
@@ -58,7 +64,7 @@
                 placeholder="비밀번호..."
               />
             </div>
-            <div class="text-danger mb-2"></div>
+            <div class="text-danger mb-2">${msg}</div>
             <div class="col-auto text-center">
               <button type="button" id="btn-login" class="btn btn-outline-primary mb-3">
                 로그인
@@ -78,7 +84,7 @@
     ></script>
     <script>
     document.querySelector("#btn-mv-join").addEventListener("click", function () {
-    	location.href = "${root}/user";
+    	location.href = "${root}/user?act=mvjoin";
       });
     
     document.querySelector("#btn-login").addEventListener("click", function () {

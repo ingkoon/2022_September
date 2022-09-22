@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/common/header.jsp" %>
+<c:if test="${empty userinfo}">
+	<script type="text/javascript">
+		alert("로그인 후 이용 가능한 페이지입니다.");
+		location.href = "${root}/user?act=mvlogin";
+	</script>
+</c:if>
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10 col-sm-12">
           <h2 class="my-3 py-3 shadow-sm bg-light text-center">

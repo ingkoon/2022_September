@@ -3,6 +3,8 @@ package edu.ssafy;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -57,6 +59,11 @@ public class LifeCycleServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		System.out.println("doPost-----------------------------------------");
+		RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+
+		// rd.forward(request, response);
+		
+		// response.sendRedirect("index.jsp");
 	}
 
 }

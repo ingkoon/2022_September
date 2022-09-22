@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/common/header.jsp" %>
-<c:if test="${articles == null}">
+<c:if test="${empty userinfo}">
+	<script type="text/javascript">
+		alert("로그인 후 이용 가능한 페이지입니다.");
+		location.href = "${root}/user?act=mvlogin";
+	</script>
+</c:if>
+<c:if test="${empty articles}">
 	<script type="text/javascript">
 		alert("정상적인 URL 접근이 아닙니.");
 		location.href = "${root}/board?act=list&pgno=1&key=&word=";
@@ -21,6 +27,8 @@
             </div>
             <div class="col-md-7 offset-3">
               <form class="d-flex" id="form-search" action="">
+                <input type="hidden" name="act" value="list"/>
+                <input type="hidden" name="pgno" value="1"/>
                 <select
                   class="form-select form-select-sm ms-5 me-1 w-50"
                   name="key"
@@ -48,24 +56,26 @@
               </tr>
             </thead>
             <tbody>
-
+          <c:if test="${!empty articles}">
+			<c:forEach var="article" items="${articles}">
               <tr class="text-center">
-                <th scope="row">글번호</th>
+                <th scope="row">${article.articleNo}</th>
                 <td class="text-start">
                   <a
                     href="#"
                     class="article-title link-dark"
-                    data-no="글번호"
+                    data-no="${article.articleNo}"
                     style="text-decoration: none"
                   >
-                    	제목
+                    ${article.subject}
                   </a>
                 </td>
-                <td>작성자</td>
-                <td>조회수</td>
-                <td>작성일</td>
+                <td>${article.userName}</td>
+                <td>${article.hit}</td>
+                <td>${article.registerTime}</td>
               </tr>
-
+             </c:forEach>
+           </c:if>
             </tbody>
           </table>
         </div>
@@ -97,12 +107,17 @@
       let titles = document.querySelectorAll(".article-title");
       titles.forEach(function (title) {
         title.addEventListener("click", function () {
-       	  this.getAttribute("data-no");
+       	  document.querySelector("#act").value = "view";
+       	  document.querySelector("#pgno").value = "${qs.pgno}";
+       	  document.querySelector("#key").value = "${qs.key}";
+       	  document.querySelector("#word").value = "${qs.word}";
+          document.querySelector("#articleno").value = this.getAttribute("data-no");
+          document.querySelector("#form-no-param").submit();
         });
       });
 
       document.querySelector("#btn-mv-register").addEventListener("click", function () {
-        location.href = "${root}/board";
+        location.href = "${root}/board?act=mvwrite";
       });
       
       document.querySelector("#btn-search").addEventListener("click", function () {

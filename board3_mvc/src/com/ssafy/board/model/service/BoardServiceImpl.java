@@ -23,32 +23,37 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int writeArticle(BoardDto boardDto) throws Exception {
-		return 0;
+		return boardDao.writeArticle(boardDto);
 	}
 
 	@Override
 	public List<BoardDto> listArticle(Map<String, String> map) throws Exception {
-		return null;
+		int pgNo = Integer.parseInt(map.get("pgno"));
+		int end = pgNo * SizeConstant.LIST_SIZE;
+		int start = end - SizeConstant.LIST_SIZE;
+		map.put("start", start + "");
+		map.put("end", end + "");
+		return boardDao.listArticle(map);
 	}
 
 	@Override
 	public BoardDto getArticle(int articleNo) throws Exception {
-		return null;
+		return boardDao.getArticle(articleNo);
 	}
 
 	@Override
 	public void updateHit(int articleNo) throws Exception {
-		
+		boardDao.updateHit(articleNo);
 	}
 
 	@Override
 	public void modifyArticle(BoardDto boardDto) throws Exception {
-		
+		boardDao.modifyArticle(boardDto);
 	}
 
 	@Override
 	public void deleteArticle(int articleNo) throws Exception {
-		
+		boardDao.deleteArticle(articleNo);
 	}
 
 }

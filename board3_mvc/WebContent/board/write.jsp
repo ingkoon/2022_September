@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/common/header.jsp" %>
+<c:if test="${empty userinfo}">
+	<script type="text/javascript">
+		alert("로그인 후 이용 가능한 페이지입니다.");
+		location.href = "${root}/user?act=mvlogin";
+	</script>
+</c:if>
       <div class="row justify-content-center">
         <div class="col-lg-8 col-md-10 col-sm-12">
           <h2 class="my-3 py-3 shadow-sm bg-light text-center">
@@ -8,7 +14,10 @@
         </div>
         <div class="col-lg-8 col-md-10 col-sm-12">
           <form id="form-register" method="POST" action="">
-
+            <input type="hidden" name="act" value="write"/>
+            <input type="hidden" name="pgno" value="1">
+	        <input type="hidden" name="key" value="">
+	        <input type="hidden" name="word" value="">
             <div class="mb-3">
               <label for="subject" class="form-label">제목 : </label>
               <input
@@ -35,7 +44,12 @@
         </div>
       </div>
     </div>
-
+    <form id="form-param" method="get" action="">
+      <input type="hidden" id="act" name="act" value="">
+      <input type="hidden" id="pgno" name="pgno" value="${qs.pgno}">
+      <input type="hidden" id="key" name="key" value="${qs.key}">
+      <input type="hidden" id="word" name="word" value="${qs.word}">
+    </form>
     <script>
       document.querySelector("#btn-register").addEventListener("click", function () {
         if (!document.querySelector("#subject").value) {
@@ -53,7 +67,10 @@
       
       document.querySelector("#btn-list").addEventListener("click", function () {
     	if(confirm("취소를 하시면 작성한 글은 삭제됩니다.\n취소하시겠습니까?")) {
-
+  		  let form = document.querySelector("#form-param");
+       	  document.querySelector("#act").value = "list";
+       	  form.setAttribute("action", "${root}/board");
+          form.submit();
    	    }
       });
     </script>
